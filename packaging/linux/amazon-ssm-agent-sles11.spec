@@ -77,9 +77,9 @@ fi
 
 %posttrans
 # Start the agent after initial install or upgrade
-if [ $1 -ge 0 ]; then
-     chkconfig --set amazon-ssm-agent  on
-     service amazon-ssm-agent start
+# if [ $1 -ge 0 ]; then
+#     chkconfig --set amazon-ssm-agent  on
+#     service amazon-ssm-agent start
 #    /sbin/init --version &> stdout.txt
 #    if [[ `cat stdout.txt` =~ upstart ]]; then
 #        /sbin/start amazon-ssm-agent
@@ -89,7 +89,7 @@ if [ $1 -ge 0 ]; then
 #        systemctl daemon-reload
 #    fi
 #    rm stdout.txt
-fi
+# fi
 
 %clean
 # rpmbuild deletes $buildroot after building, specifying clean section to make sure it is not deleted
