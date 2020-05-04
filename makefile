@@ -47,6 +47,9 @@ prepack:: cpy-plugins prepack-linux prepack-linux-arm64 prepack-linux-386 prepac
 
 package:: create-package-folder package-linux package-windows package-darwin
 
+# Garima Bathla, creating new makefile for SLES11 Package.
+package-sles11:: create-package-folder package-linux-sles11
+
 release:: clean quick-integtest checkstyle pre-release build prepack package build-tests
 
 ifneq ($(FINALIZE),)
@@ -373,6 +376,10 @@ create-package-folder:
 package-linux: package-rpm-386 package-deb-386 package-rpm package-deb package-deb-arm package-deb-arm64 package-rpm-arm64
 	$(BGO_SPACE)/Tools/src/create_linux_package.sh
 
+.PHONY: package-linux-sles11
+package-linux-sles11: package-rpm-sles11
+	$(BGO_SPACE)/Tools/src/create_linux_package_sles11.sh
+
 .PHONY: package-windows
 package-windows: package-win-386 package-win
 	$(BGO_SPACE)/Tools/src/create_windows_package.sh
@@ -386,6 +393,10 @@ create-source-archive:
 .PHONY: package-rpm
 package-rpm: create-package-folder
 	$(BGO_SPACE)/Tools/src/create_rpm.sh
+
+.PHONY: package-rpm-sles11
+package-rpm-sles11: create-package-folder
+	$(BGO_SPACE)/Tools/src/create_rpm_sles11.sh
 
 .PHONY: package-deb
 package-deb: create-package-folder
